@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Doctor {
+private:
+    string name;
+    int id;
+    string specialization;
+    int patientsAttended;
+    double consultationFee;
+    string dateOfJoining;
+
+public:
+    // Constructor
+    Doctor(string n, int i, string s, int p, double c, string d) 
+        : name(n), id(i), specialization(s), patientsAttended(p), consultationFee(c), dateOfJoining(d) {}
+
+    // Member function to get doctor details
+    void displayDetails() {
+        cout << "Doctor Name: " << name << endl;
+        cout << "ID: " << id << endl;
+        cout << "Specialization: " << specialization << endl;
+        cout << "Number of Patients Attended: " << patientsAttended << endl;
+        cout << "Consultation Fee per Patient: " << consultationFee << endl;
+        cout << "Date of Joining: " << dateOfJoining << endl;
+    }
+
+    // Member function to calculate total earnings
+    double calculateEarnings() {
+        return patientsAttended * consultationFee;
+    }
+
+    // Member function to check if earnings are more than 50,000 per month
+    bool earnsMoreThan(double amount) {
+        return calculateEarnings() > amount;
+    }
+};
+
+int main() {
+    // Creating a vector of Doctor objects
+    vector<Doctor> doctors = {
+        Doctor("Dr. Smith", 101, "Cardiology", 150, 500.0, "2023-01-15"),
+        Doctor("Dr. Johnson", 102, "Neurology", 100, 600.0, "2022-05-20"),
+        Doctor("Dr. Williams", 103, "Orthopedics", 200, 300.0, "2021-11-10")
+    };
+
+    // Displaying details of doctors earning more than 50,000 per month
+    cout << "Doctors earning more than 50,000 per month:\n";
+    for (Doctor &doc : doctors) {
+        if (doc.earnsMoreThan(50000)) {
+            doc.displayDetails();
+            cout << "Total Earnings: " << doc.calculateEarnings() << endl << endl;
+        }
+    }
+
+    return 0;
+}
